@@ -240,3 +240,29 @@ class TransactionController extends Controller
         }
     }
 }
+
+public function destroy($id)
+{
+   try 
+        {
+   
+            DB::transaction(function ()
+                {
+
+                $toDelete = request('delete');
+
+                Radius::where('UserName', $toDelete )->delete();
+
+                });
+
+                return redirect('home');
+
+        }  
+
+    catch(\Exception $e)
+        {
+           
+            return 'ok';
+
+        }
+    }   
